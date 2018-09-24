@@ -10,7 +10,8 @@
 from keras.models import Model
 from keras.layers import Input, Conv2D, GlobalAveragePooling2D, Dropout
 from keras.layers import Activation, BatchNormalization, add, Reshape
-from keras.applications.mobilenet import relu6, DepthwiseConv2D
+from keras.layers import ReLU, DepthwiseConv2D
+# from keras.applications.mobilenet import relu6, DepthwiseConv2D
 from keras.utils.vis_utils import plot_model
 
 from keras import backend as K
@@ -38,7 +39,7 @@ def _conv_block(inputs, filters, kernel, strides):
 
     x = Conv2D(filters, kernel, padding='same', strides=strides)(inputs)
     x = BatchNormalization(axis=channel_axis)(x)
-    return Activation(relu6)(x)
+    return ReLU(6.)(x)
 
 
 def _bottleneck(inputs, filters, kernel, t, s, r=False):
@@ -68,7 +69,7 @@ def _bottleneck(inputs, filters, kernel, t, s, r=False):
 
     x = DepthwiseConv2D(kernel, strides=(s, s), depth_multiplier=1, padding='same')(x)
     x = BatchNormalization(axis=channel_axis)(x)
-    x = Activation(relu6)(x)
+    x = ReLU(6.)(x)
 
     x = Conv2D(filters, (1, 1), strides=(1, 1), padding='same')(x)
     x = BatchNormalization(axis=channel_axis)(x)

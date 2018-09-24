@@ -3,6 +3,11 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+.idea/
+.DS_Store
+data/validation/
+data/train/
+
 # C extensions
 *.so
 

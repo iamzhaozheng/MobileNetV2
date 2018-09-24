@@ -6,6 +6,7 @@ import sys
 import argparse
 import pandas as pd
 
+# from keras.applications.mobilenetv2 import MobileNetV2
 from mobilenet_v2 import MobileNetv2
 
 from keras.optimizers import Adam
@@ -20,6 +21,7 @@ def main(argv):
     # Required arguments.
     parser.add_argument(
         "--classes",
+        default=10,
         help="The number of classes of dataset.")
     # Optional arguments.
     parser.add_argument(
@@ -141,6 +143,7 @@ def train(batch, epochs, num_classes, size, weights, tclasses):
         model = fine_tune(num_classes, weights, model)
     else:
         model = MobileNetv2((size, size, 3), num_classes)
+        # model = MobileNetV2(include_top=True, weights=None, pooling='max', alpha=0.35, classes=num_classes)
 
     opt = Adam()
     earlystop = EarlyStopping(monitor='val_acc', patience=30, verbose=0, mode='auto')

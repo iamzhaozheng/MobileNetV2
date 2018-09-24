@@ -3,14 +3,14 @@ A sample of convert the cifar100 dataset to 224 * 224 size train\val data.
 """
 import cv2
 import os
-from keras.datasets import cifar100
+from keras.datasets import cifar10
 
 
 def convert():
     train = 'train//'
     val = 'validation//'
 
-    (X_train, y_train), (X_test, y_test) = cifar100.load_data(label_mode='fine')
+    (X_train, y_train), (X_test, y_test) = cifar10.load_data()
 
     for i in range(len(X_train)):
         x = X_train[i]
